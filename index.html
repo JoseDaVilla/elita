@@ -284,14 +284,24 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 .intro .ltr{transform-box:fill-box;transform:translateY(7px)}
 .intro .sub{transform-box:fill-box;transform-origin:50% 50%;transform:scaleX(1.06)}
 .intro-skip{position:absolute;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));background:none;border:0;padding:10px 6px;font:500 .85rem/1 var(--sans);color:var(--piedra);cursor:pointer;opacity:0;transition:opacity .4s .6s}
+.intro.done{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:#F5F7F9;cursor:pointer;transition:opacity .9s ease,visibility 0s .9s}
+.intro-bg{position:absolute;inset:-3%;background:url(assets/intro/fondo.webp) 62% 50%/cover no-repeat;opacity:0;transform:scale(1.05)}
+.intro svg{position:relative;width:min(80vw,600px,calc(70vh * 620 / 510));height:auto;overflow:visible}
+.intro .lyr,.intro .st,.intro .ltr,.intro .sub,.intro .full{opacity:0}
+.intro .m path{fill:none;stroke:#fff;stroke-dasharray:1 1;stroke-dashoffset:1}
+.intro .lyr{opacity:1}
+.intro .st{transform-box:fill-box;transform-origin:56.8% 26.5%;transform:scale(.55) rotate(-8deg)}
+.intro .ltr{transform-box:fill-box;transform:translateY(7px)}
+.intro .sub{transform-box:fill-box;transform-origin:50% 50%;transform:scaleX(1.06)}
+.intro-skip{position:absolute;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));background:none;border:0;padding:10px 6px;font:500 .85rem/1 var(--sans);color:var(--piedra);cursor:pointer;opacity:0;transition:opacity .4s .6s}
 .intro.play .intro-skip{opacity:1}
-.intro.play .intro-bg{animation:introBg 2.4s cubic-bezier(.2,.6,.2,1) forwards}
+.intro.play .intro-bg{animation:introBg 1.68s cubic-bezier(.2,.6,.2,1) forwards}
 .intro.play .m path{animation:draw var(--d) var(--t) cubic-bezier(.5,.05,.25,1) forwards}
-.intro.play .st{animation:bloom .8s 2.05s cubic-bezier(.2,.8,.25,1.15) forwards}
-.intro.play .full{animation:show .35s 2.55s ease forwards}
-.intro.play .ltr{animation:rise .75s var(--t) cubic-bezier(.2,.7,.2,1) forwards}
-.intro.play .sub{animation:track .9s 3.05s cubic-bezier(.2,.7,.2,1) forwards}
-.intro.done{opacity:0;visibility:hidden;transition:opacity .5s ease,visibility 0s .5s}
+.intro.play .st{animation:bloom 0.56s 1.43s cubic-bezier(.2,.8,.25,1.15) forwards}
+.intro.play .full{animation:show 0.24s 1.78s ease forwards}
+.intro.play .ltr{animation:rise 0.52s var(--t) cubic-bezier(.2,.7,.2,1) forwards}
+.intro.play .sub{animation:track 0.63s 2.13s cubic-bezier(.2,.7,.2,1) forwards}
+.intro.done{opacity:0;visibility:hidden;transition:opacity 0.35s ease,visibility 0s 0.35s}
 .intro.fast *{animation-duration:.01s!important;animation-delay:0s!important}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes bloom{to{opacity:1;transform:none}}
@@ -314,12 +324,12 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
       <filter id="pluma" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.2"/></filter>
       <mask id="crece" maskUnits="userSpaceOnUse" x="150" y="330" width="680" height="570">
         <g class="m" filter="url(#pluma)">
-          <path pathLength="1" style="--t:.25s;--d:1.3s" stroke-width="22" stroke-linecap="round" d="M346,862 C356,830 366,800 378,765 C390,735 410,712 432,690 C452,668 466,640 480,605 C492,578 506,548 523,513"/>
-          <path pathLength="1" style="--t:1s;--d:.8s" stroke-width="76" d="M456,669 Q408,612 367,540"/>
-          <path pathLength="1" style="--t:1.15s;--d:.85s" stroke-width="92" d="M492,575 Q560,603 618,686"/>
-          <path pathLength="1" style="--t:1.4s;--d:.75s" stroke-width="82" d="M527,527 Q485,480 437,423"/>
-          <path pathLength="1" style="--t:1.5s;--d:.85s" stroke-width="108" d="M521,520 Q550,446 556,364"/>
-          <path pathLength="1" style="--t:1.65s;--d:.7s" stroke-width="70" d="M515,520 Q575,507 640,482"/>
+          <path pathLength="1" style="--t:0.17s;--d:0.91s" stroke-width="22" stroke-linecap="round" d="M346,862 C356,830 366,800 378,765 C390,735 410,712 432,690 C452,668 466,640 480,605 C492,578 506,548 523,513"/>
+          <path pathLength="1" style="--t:0.7s;--d:0.56s" stroke-width="76" d="M456,669 Q408,612 367,540"/>
+          <path pathLength="1" style="--t:0.8s;--d:0.59s" stroke-width="92" d="M492,575 Q560,603 618,686"/>
+          <path pathLength="1" style="--t:0.98s;--d:0.52s" stroke-width="82" d="M527,527 Q485,480 437,423"/>
+          <path pathLength="1" style="--t:1.05s;--d:0.59s" stroke-width="108" d="M521,520 Q550,446 556,364"/>
+          <path pathLength="1" style="--t:1.15s;--d:0.49s" stroke-width="70" d="M515,520 Q575,507 640,482"/>
         </g>
       </mask>
       <clipPath id="cE"><rect x="200" y="584" width="68" height="114"/></clipPath>
@@ -331,11 +341,11 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
     <image class="lyr" href="assets/intro/flor.webp" x="180" y="360" width="620" height="510" mask="url(#crece)"/>
     <image class="full" href="assets/intro/flor-completa.webp" x="180" y="360" width="620" height="510"/>
     <image class="st" href="assets/intro/estambres.webp" x="180" y="360" width="620" height="510"/>
-    <g clip-path="url(#cE)"><image class="ltr" style="--t:2.2s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
-    <g clip-path="url(#cL)"><image class="ltr" style="--t:2.32s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
-    <g clip-path="url(#cI)"><image class="ltr" style="--t:2.44s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
-    <g clip-path="url(#cT)"><image class="ltr" style="--t:2.56s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
-    <g clip-path="url(#cA)"><image class="ltr" style="--t:2.68s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
+    <g clip-path="url(#cE)"><image class="ltr" style="--t:1.54s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
+    <g clip-path="url(#cL)"><image class="ltr" style="--t:1.62s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
+    <g clip-path="url(#cI)"><image class="ltr" style="--t:1.71s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
+    <g clip-path="url(#cT)"><image class="ltr" style="--t:1.79s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
+    <g clip-path="url(#cA)"><image class="ltr" style="--t:1.88s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
     <image class="sub" href="assets/intro/subtitulo.webp" x="180" y="360" width="620" height="510"/>
   </svg>
   <button class="intro-skip" type="button" tabindex="-1">Saltar</button>
@@ -645,10 +655,10 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
       // El logo viaja hasta su lugar en la portada mientras la pared de la intro se desvanece
       const r = svg.getBoundingClientRect(), ease = 'cubic-bezier(.65,0,.25,1)';
       svg.animate([{ transform: 'none' }, { transform: `translate(${t.x - r.left}px, ${t.y - r.top}px) scale(${t.w / r.width})` }],
-        { duration: 1100, easing: ease, fill: 'forwards' }).finished.then(reveal);
+        { duration: 850, easing: ease, fill: 'forwards' }).finished.then(reveal);
       svg.style.transformOrigin = '0 0';
-      $('.intro-bg', intro).animate([{ opacity: 1 }, { opacity: 0 }], { duration: 900, easing: 'ease', fill: 'forwards' });
-      intro.animate([{ backgroundColor: '#F5F7F9' }, { backgroundColor: 'rgba(245,247,249,0)' }], { duration: 900, easing: 'ease', fill: 'forwards' });
+      $('.intro-bg', intro).animate([{ opacity: 1 }, { opacity: 0 }], { duration: 700, easing: 'ease', fill: 'forwards' });
+      intro.animate([{ backgroundColor: '#F5F7F9' }, { backgroundColor: 'rgba(245,247,249,0)' }], { duration: 700, easing: 'ease', fill: 'forwards' });
       $('.intro-skip', intro).style.opacity = 0;
     };
     const skip = () => { intro.classList.add('fast'); setTimeout(finish, 120); };
@@ -656,7 +666,7 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
     const load = Promise.all(urls.map(u => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = u; })));
     Promise.race([load, new Promise(r => setTimeout(r, 2500))]).then(() => {
       requestAnimationFrame(() => intro.classList.add('play'));
-      timer = setTimeout(finish, 4300);
+      timer = setTimeout(finish, 3000);
     });
     intro.addEventListener('click', skip);
     addEventListener('keydown', e => { if (!ended && ['Escape', 'Enter', ' '].includes(e.key)) skip(); });

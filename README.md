@@ -43,6 +43,6 @@ Cada push a `main` publica con GitHub Actions (`.github/workflows/pages.yml`). E
 
 ## Intro
 
-La primera vez que alguien abre la página, la flor del logo se dibuja sobre su fondo de sombras y luego aparecen las letras. Dura unos 4,5 segundos, se salta con un clic, tecla o scroll, y no vuelve a salir en ese navegador. Para verla otra vez: abrir la página con `?intro` al final de la dirección. No se muestra a quien tiene activado "reducir movimiento".
+La primera vez que alguien abre la página, la flor del logo se dibuja sobre su fondo de sombras y luego aparecen las letras. Dura unos 4 segundos, se salta con un clic, tecla o scroll, y no vuelve a salir en ese navegador. Para verla otra vez: abrir la página con `?intro` al final de la dirección. No se muestra a quien tiene activado "reducir movimiento".
 
 Las capas están en `assets/intro/` (flor, estambres, letras, subtítulo y fondo), separadas del logo original.
