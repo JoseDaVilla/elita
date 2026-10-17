@@ -82,10 +82,8 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 .top{position:sticky;top:0;z-index:40;height:var(--header);background:color-mix(in srgb,var(--cal) 88%,transparent);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
 .top.scrolled{border-bottom-color:var(--linea)}
 .top .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:none}
-.brand{transition:opacity .35s,transform .35s;display:flex;flex-direction:column;text-decoration:none;color:var(--buganvilla);line-height:1}
-.brand b{font:400 1.5rem/1 var(--serif);letter-spacing:.42em;margin-right:-.42em}
+.brand{display:block;font:400 1.35rem/1 var(--serif);color:var(--buganvilla);text-decoration:none;transition:opacity .35s,transform .35s}
 .js .top:not(.past-logo) .brand{opacity:0;transform:translateY(4px);pointer-events:none}
-.brand small{font:400 .62rem/1 var(--serif);letter-spacing:.5em;margin-top:6px;color:var(--buganvilla)}
 .nav{display:flex;align-items:center;gap:clamp(18px,2.4vw,34px)}
 .nav a{text-decoration:none;font-size:.95rem}
 .nav a:not(.btn):hover{color:var(--buganvilla)}
@@ -95,19 +93,17 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 .menu-btn .ic-close,.menu-btn[aria-expanded="true"] .ic-open{display:none}
 .menu-btn[aria-expanded="true"] .ic-close{display:block}
 
-/* Portada */
-.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:calc(100svh - var(--header));max-height:980px}
-.hero-wall{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,4vh,48px) var(--gutter) clamp(28px,5vh,56px);isolation:isolate}
-.hero-wall::before{content:"";position:absolute;inset:-6%;background:url(assets/sombra-hojas.webp) center/cover no-repeat;opacity:.62;z-index:-1;transform-origin:70% 100%;animation:brisa 16s ease-in-out infinite alternate}
-@keyframes brisa{from{transform:rotate(-1.1deg) translate3d(-1.2%,0,0)}to{transform:rotate(1.1deg) translate3d(1.2%,-.8%,0)}}
-.hero-logo{width:min(380px,86%,36vh);margin:0 0 clamp(18px,3vh,36px) -2%}
-.hero h1{font-size:clamp(1.6rem,2.3vw,2.2rem);line-height:1.16;max-width:22ch;margin-bottom:.5em}
-.hero-lead{color:var(--piedra);max-width:38ch;margin-bottom:clamp(18px,3vh,28px)}
+/* Portada: díptico con el logo original y una obra */
+.hero-pair{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);height:clamp(420px,calc(100svh - var(--header) - 190px),780px)}
+.hero-pair figure{position:relative;margin:0;overflow:hidden;background:var(--cal-2)}
+.hero-pair img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-logo img{object-position:50% 47%}
+.hero-art img{object-position:40% 55%}
+.hero-art figcaption{position:absolute;left:20px;bottom:18px;background:rgba(243,242,239,.92);padding:7px 12px;font-size:.8rem;line-height:1.35}
+.hero-text{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:20px var(--gutter);align-items:start;padding-top:clamp(28px,4vh,44px);padding-bottom:clamp(28px,4vh,44px);max-width:none}
+.hero h1{font-size:clamp(1.6rem,2.3vw,2.2rem);line-height:1.16;max-width:20ch}
+.hero-lead{color:var(--piedra);max-width:46ch;margin-bottom:18px}
 .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
-.hero-art{position:relative;margin:0;overflow:hidden;background:var(--cal-2)}
-.hero-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 55%}
-.hero-art figcaption{position:absolute;left:20px;bottom:18px;background:rgba(243,242,239,.92);padding:8px 12px;font-size:.8rem;line-height:1.35;color:var(--tinta)}
-.hero-art figcaption span{display:block;color:var(--piedra)}
 
 /* Secciones */
 .sec{padding:clamp(80px,11vw,150px) 0}
@@ -190,7 +186,7 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 /* Pie */
 .pie{padding:56px 0 calc(40px + env(safe-area-inset-bottom))}
 .pie .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
-.pie img{width:176px}
+.pie .pie-marca{font:400 1.35rem/1 var(--serif);color:var(--buganvilla);margin:0}
 .pie p{margin:0;font-size:.88rem;color:var(--piedra)}
 .pie nav{display:flex;gap:22px;font-size:.92rem}
 .pie nav a{text-decoration:none}
@@ -231,11 +227,12 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
   .nav.open{opacity:1;transform:none;visibility:visible;transition:opacity .2s,transform .2s}
   .nav a:not(.btn){padding:14px 0;border-bottom:1px solid var(--linea);font-size:1.05rem}
   .nav .btn{margin-top:18px;justify-content:center;min-height:48px}
-  .hero{grid-template-columns:1fr;min-height:0;max-height:none}
-  .hero-wall{padding:28px var(--gutter) 40px}
-  .hero-logo{width:min(300px,78%);margin:0 auto 24px}
+  .hero{display:flex;flex-direction:column}
+  .hero-pair{display:contents}
+  .hero-logo{aspect-ratio:1/1;order:1}
+  .hero-text{order:2;grid-template-columns:1fr;padding-top:28px;padding-bottom:40px}
+  .hero-art{aspect-ratio:4/5;order:3}
   .hero h1{font-size:1.7rem;max-width:none}
-  .hero-art{aspect-ratio:4/5}
   .hero-art figcaption{left:12px;bottom:12px}
   .sec-head,.extra{grid-template-columns:1fr}
   .oficio{grid-template-columns:1fr;gap:22px}
@@ -268,7 +265,7 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 
 <header class="top" id="top">
   <div class="wrap">
-    <a class="brand" href="#" aria-label="Elita Arte y Diseño, inicio"><b>ELITA</b><small>ARTE &amp; DISEÑO</small></a>
+    <a class="brand" href="#">Elita Arte &amp; Diseño</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav"><span class="sr-only">Abrir menú</span><span class="ic-open"><svg class="i" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M4 5h16" /> <path d="M4 12h16" /> <path d="M4 19h16" /> </svg></span><span class="ic-close"><svg class="i" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M18 6 6 18" /> <path d="m6 6 12 12" /> </svg></span></button>
     <nav class="nav" id="nav" aria-label="Principal">
       <a href="#oficios">Lo que hago</a>
@@ -283,19 +280,25 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 <main id="contenido">
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero-wall">
-    <img class="hero-logo" src="assets/logo-burgundy.webp" width="860" height="725" alt="Elita Arte y Diseño" fetchpriority="high">
+  <div class="hero-pair">
+    <figure class="hero-logo">
+      <img src="assets/marca/elita-logo-original.jpg" width="960" height="1280" alt="Elita Arte y Diseño" fetchpriority="high">
+    </figure>
+    <figure class="hero-art">
+      <img src="assets/obra/verde-espejo.webp" width="1080" height="1145" alt="Cuadro abstracto en verdes y crema apoyado junto a un espejo de marco tallado" fetchpriority="high">
+      <figcaption>Pieza en acrílico</figcaption>
+    </figure>
+  </div>
+  <div class="wrap hero-text">
     <h1 id="hero-title">Murales, cuadros y molduras pintados a mano en Barranquilla</h1>
-    <p class="hero-lead">Soy Daniela, arquitecta y artista plástica. Diseño cada pieza pensando en el espacio donde va a vivir.</p>
-    <div class="hero-actions" id="hero-actions">
-      <a class="btn btn-wa" href="https://wa.me/573186012345?text=Hola%20Daniela%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20contarte%20de%20un%20proyecto." target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Escríbeme por WhatsApp</a>
-      <a class="link" href="#obra">Ver la obra</a>
+    <div>
+      <p class="hero-lead">Soy Daniela, arquitecta y artista plástica. Diseño cada pieza pensando en el espacio donde va a vivir.</p>
+      <div class="hero-actions" id="hero-actions">
+        <a class="btn btn-wa" href="https://wa.me/573186012345?text=Hola%20Daniela%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20contarte%20de%20un%20proyecto." target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Escríbeme por WhatsApp</a>
+        <a class="link" href="#obra">Ver la obra</a>
+      </div>
     </div>
   </div>
-  <figure class="hero-art">
-    <img src="assets/obra/verde-espejo.webp" width="1080" height="1145" alt="Cuadro abstracto en verdes y crema apoyado junto a un espejo de marco tallado" fetchpriority="high">
-    <figcaption>Pieza en acrílico<span>Acrílico sobre lienzo</span></figcaption>
-  </figure>
 </section>
 
 <section class="sec" id="oficios" aria-labelledby="oficios-title">
@@ -363,15 +366,15 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 <figure class="work" data-cat="cuadros"><button class="work-open" type="button" data-index="1" aria-label="Ampliar: Cartagena"><img src="assets/obra/cartagena-palenquera.webp" width="787" height="1400" alt="Pintura de una palenquera con frutas caminando por una calle colonial" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Cartagena</span><span class="work-detail">Acrílico texturizado sobre lienzo</span></figcaption></figure>
 <figure class="work" data-cat="muros"><button class="work-open" type="button" data-index="2" aria-label="Ampliar: Bosque rosa para Vittoria"><img src="assets/obra/mural-bosque-rosa.webp" width="900" height="1125" alt="Mural de árboles en rosa pálido sobre la cuna de una habitación de bebé" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Bosque rosa para Vittoria</span><span class="work-detail">Mural y molduras</span></figcaption></figure>
 <figure class="work" data-cat="cuadros"><button class="work-open" type="button" data-index="3" aria-label="Ampliar: Proyecto Meraki"><img src="assets/obra/meraki-gran-formato.webp" width="720" height="1280" alt="Dos cuadros grandes de formas orgánicas blancas sobre un sofá gris" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Proyecto Meraki</span><span class="work-detail">Gran formato, acrílico texturizante sobre lienzo</span></figcaption></figure>
-<figure class="work" data-cat="muros"><button class="work-open" type="button" data-index="4" aria-label="Ampliar: Molduras y mural"><img src="assets/obra/molduras-rayas.webp" width="787" height="1400" alt="Pared de rayas azules onduladas con moldura color vino junto a una cuna" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Molduras y mural</span><span class="work-detail">Rayas onduladas pintadas a mano</span></figcaption></figure>
-<figure class="work" data-cat="cuadros"><button class="work-open" type="button" data-index="5" aria-label="Ampliar: Pieza única"><img src="assets/obra/pieza-unica-verde.webp" width="640" height="1136" alt="Cuadro enmarcado con una trama de gotas verdes que se aclaran hacia abajo" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Pieza única</span><span class="work-detail">Acrílico sobre lienzo</span></figcaption></figure>
-<figure class="work" data-cat="muros"><button class="work-open" type="button" data-index="6" aria-label="Ampliar: Mural para Victoria"><img src="assets/obra/mural-arcoiris.webp" width="787" height="1400" alt="Mural de arcoíris pastel con flores lila y amarillas" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Mural para Victoria</span><span class="work-detail">Arcoíris y flores a mano</span></figcaption></figure>
+<figure class="work" data-cat="muros"><button class="work-open" type="button" data-index="4" aria-label="Ampliar: Molduras y mural"><img src="assets/obra/molduras-rayas.webp" width="787" height="1400" alt="Pared de rayas azules onduladas con moldura color vino junto a una cuna" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Molduras y mural</span></figcaption></figure>
+<figure class="work" data-cat="cuadros"><button class="work-open" type="button" data-index="5" aria-label="Ampliar: Pieza única"><img src="assets/obra/pieza-unica-verde.webp" width="640" height="1136" alt="Cuadro enmarcado con una trama de gotas verdes que se aclaran hacia abajo" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Pieza única</span></figcaption></figure>
+<figure class="work" data-cat="muros"><button class="work-open" type="button" data-index="6" aria-label="Ampliar: Mural para Victoria"><img src="assets/obra/mural-arcoiris.webp" width="787" height="1400" alt="Mural de arcoíris pastel con flores lila y amarillas" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Mural para Victoria</span></figcaption></figure>
 <figure class="work" data-cat="cuadros"><button class="work-open" type="button" data-index="7" aria-label="Ampliar: Water Paint"><img src="assets/obra/water-paint.webp" width="720" height="1280" alt="Detalle de pintura con manchas de verde profundo, salvia y arena" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Water Paint</span><span class="work-detail">Acrílico sobre lienzo, hoy en Medellín</span></figcaption></figure>
 <figure class="work" data-cat="muros"><button class="work-open" type="button" data-index="8" aria-label="Ampliar: Mural de recuadros"><img src="assets/obra/mural-cuadros.webp" width="787" height="1400" alt="Pasillo con una pared pintada a cuadros en rosa y crema" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Mural de recuadros</span><span class="work-detail">Patrón a cuadros hecho a mano</span></figcaption></figure>
 <figure class="work" data-cat="cuadros"><button class="work-open" type="button" data-index="9" aria-label="Ampliar: Hotel en Cartagena"><img src="assets/obra/cartagena-hotel.webp" width="720" height="1280" alt="Cuadro de la Torre del Reloj de Cartagena sobre un sofá" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Hotel en Cartagena</span><span class="work-detail">Piezas de arte para un hotel</span></figcaption></figure>
 <figure class="work" data-cat="muros"><button class="work-open" type="button" data-index="10" aria-label="Ampliar: Mariposas monarca"><img src="assets/obra/mural-mariposas.webp" width="640" height="1136" alt="Detalle de mural con una flor blanca y una mariposa monarca" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Mariposas monarca</span><span class="work-detail">Mural a mano</span></figcaption></figure>
-<figure class="work" data-cat="cuadros"><button class="work-open" type="button" data-index="11" aria-label="Ampliar: Arte boho"><img src="assets/obra/arena-boho.webp" width="720" height="1100" alt="Detalle de textura en relieve color arena con una curva suave" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Arte boho</span><span class="work-detail">Acrílico texturizado efecto arena, 1,0 × 0,70 m</span></figcaption></figure>
-<figure class="work" data-cat="muros"><button class="work-open" type="button" data-index="12" aria-label="Ampliar: Muro en relieve"><img src="assets/obra/relieve-floral.webp" width="787" height="1400" alt="Pared de comedor con un relieve botánico blanco sobre fondo gris" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Muro en relieve</span><span class="work-detail">Textura botánica en tonos claros</span></figcaption></figure>
+<figure class="work" data-cat="cuadros"><button class="work-open" type="button" data-index="11" aria-label="Ampliar: Arte boho"><img src="assets/obra/arena-boho.webp" width="720" height="1100" alt="Detalle de textura en relieve color arena con una curva suave" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Arte boho</span><span class="work-detail">Pieza por encargo, 1,0 × 0,70 m</span></figcaption></figure>
+<figure class="work" data-cat="muros"><button class="work-open" type="button" data-index="12" aria-label="Ampliar: Mural"><img src="assets/obra/relieve-floral.webp" width="787" height="1400" alt="Pared de comedor con un relieve botánico blanco sobre fondo gris" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Mural</span></figcaption></figure>
 <figure class="work" data-cat="muros"><button class="work-open" type="button" data-index="13" aria-label="Ampliar: Para Sebastián"><img src="assets/obra/mural-avion.webp" width="720" height="1280" alt="Mural infantil de un osito piloto en avioneta" loading="lazy" decoding="async"></button><figcaption><span class="work-title">Para Sebastián</span><span class="work-detail">Mural hecho a mano</span></figcaption></figure>
     </div>
     <p class="obra-more"><a class="link" href="https://www.instagram.com/elita.arte/" target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg> Más proyectos en Instagram</a></p>
@@ -432,7 +435,7 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 
 <footer class="pie">
   <div class="wrap">
-    <img src="assets/logo-burgundy.webp" width="860" height="725" alt="Elita Arte y Diseño" loading="lazy">
+    <p class="pie-marca">Elita Arte &amp; Diseño</p>
     <nav aria-label="Pie de página">
       <a href="#obra">Obra</a>
       <a href="https://www.instagram.com/elita.arte/" target="_blank" rel="noopener">Instagram</a>
@@ -465,7 +468,7 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // La marca del encabezado aparece cuando el logo grande sale de vista
-  new IntersectionObserver(([en]) => top.classList.toggle('past-logo', !en.isIntersecting), { rootMargin: '-72px 0px 0px 0px' }).observe($('.hero-logo'));
+  new IntersectionObserver(([en]) => top.classList.toggle('past-logo', !en.isIntersecting), { rootMargin: '-72px 0px 0px 0px' }).observe($('.hero-logo img'));
 
   // Menú en celular
   const menuBtn = $('.menu-btn'), nav = $('#nav');

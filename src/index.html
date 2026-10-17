@@ -82,10 +82,8 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 .top{position:sticky;top:0;z-index:40;height:var(--header);background:color-mix(in srgb,var(--cal) 88%,transparent);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
 .top.scrolled{border-bottom-color:var(--linea)}
 .top .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:none}
-.brand{transition:opacity .35s,transform .35s;display:flex;flex-direction:column;text-decoration:none;color:var(--buganvilla);line-height:1}
-.brand b{font:400 1.5rem/1 var(--serif);letter-spacing:.42em;margin-right:-.42em}
+.brand{display:block;font:400 1.35rem/1 var(--serif);color:var(--buganvilla);text-decoration:none;transition:opacity .35s,transform .35s}
 .js .top:not(.past-logo) .brand{opacity:0;transform:translateY(4px);pointer-events:none}
-.brand small{font:400 .62rem/1 var(--serif);letter-spacing:.5em;margin-top:6px;color:var(--buganvilla)}
 .nav{display:flex;align-items:center;gap:clamp(18px,2.4vw,34px)}
 .nav a{text-decoration:none;font-size:.95rem}
 .nav a:not(.btn):hover{color:var(--buganvilla)}
@@ -95,19 +93,17 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 .menu-btn .ic-close,.menu-btn[aria-expanded="true"] .ic-open{display:none}
 .menu-btn[aria-expanded="true"] .ic-close{display:block}
 
-/* Portada */
-.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:calc(100svh - var(--header));max-height:980px}
-.hero-wall{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,4vh,48px) var(--gutter) clamp(28px,5vh,56px);isolation:isolate}
-.hero-wall::before{content:"";position:absolute;inset:-6%;background:url(assets/sombra-hojas.webp) center/cover no-repeat;opacity:.62;z-index:-1;transform-origin:70% 100%;animation:brisa 16s ease-in-out infinite alternate}
-@keyframes brisa{from{transform:rotate(-1.1deg) translate3d(-1.2%,0,0)}to{transform:rotate(1.1deg) translate3d(1.2%,-.8%,0)}}
-.hero-logo{width:min(380px,86%,36vh);margin:0 0 clamp(18px,3vh,36px) -2%}
-.hero h1{font-size:clamp(1.6rem,2.3vw,2.2rem);line-height:1.16;max-width:22ch;margin-bottom:.5em}
-.hero-lead{color:var(--piedra);max-width:38ch;margin-bottom:clamp(18px,3vh,28px)}
+/* Portada: díptico con el logo original y una obra */
+.hero-pair{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);height:clamp(420px,calc(100svh - var(--header) - 190px),780px)}
+.hero-pair figure{position:relative;margin:0;overflow:hidden;background:var(--cal-2)}
+.hero-pair img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-logo img{object-position:50% 47%}
+.hero-art img{object-position:40% 55%}
+.hero-art figcaption{position:absolute;left:20px;bottom:18px;background:rgba(243,242,239,.92);padding:7px 12px;font-size:.8rem;line-height:1.35}
+.hero-text{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:20px var(--gutter);align-items:start;padding-top:clamp(28px,4vh,44px);padding-bottom:clamp(28px,4vh,44px);max-width:none}
+.hero h1{font-size:clamp(1.6rem,2.3vw,2.2rem);line-height:1.16;max-width:20ch}
+.hero-lead{color:var(--piedra);max-width:46ch;margin-bottom:18px}
 .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
-.hero-art{position:relative;margin:0;overflow:hidden;background:var(--cal-2)}
-.hero-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 55%}
-.hero-art figcaption{position:absolute;left:20px;bottom:18px;background:rgba(243,242,239,.92);padding:8px 12px;font-size:.8rem;line-height:1.35;color:var(--tinta)}
-.hero-art figcaption span{display:block;color:var(--piedra)}
 
 /* Secciones */
 .sec{padding:clamp(80px,11vw,150px) 0}
@@ -190,7 +186,7 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 /* Pie */
 .pie{padding:56px 0 calc(40px + env(safe-area-inset-bottom))}
 .pie .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
-.pie img{width:176px}
+.pie .pie-marca{font:400 1.35rem/1 var(--serif);color:var(--buganvilla);margin:0}
 .pie p{margin:0;font-size:.88rem;color:var(--piedra)}
 .pie nav{display:flex;gap:22px;font-size:.92rem}
 .pie nav a{text-decoration:none}
@@ -231,11 +227,12 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
   .nav.open{opacity:1;transform:none;visibility:visible;transition:opacity .2s,transform .2s}
   .nav a:not(.btn){padding:14px 0;border-bottom:1px solid var(--linea);font-size:1.05rem}
   .nav .btn{margin-top:18px;justify-content:center;min-height:48px}
-  .hero{grid-template-columns:1fr;min-height:0;max-height:none}
-  .hero-wall{padding:28px var(--gutter) 40px}
-  .hero-logo{width:min(300px,78%);margin:0 auto 24px}
+  .hero{display:flex;flex-direction:column}
+  .hero-pair{display:contents}
+  .hero-logo{aspect-ratio:1/1;order:1}
+  .hero-text{order:2;grid-template-columns:1fr;padding-top:28px;padding-bottom:40px}
+  .hero-art{aspect-ratio:4/5;order:3}
   .hero h1{font-size:1.7rem;max-width:none}
-  .hero-art{aspect-ratio:4/5}
   .hero-art figcaption{left:12px;bottom:12px}
   .sec-head,.extra{grid-template-columns:1fr}
   .oficio{grid-template-columns:1fr;gap:22px}
@@ -268,7 +265,7 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 
 <header class="top" id="top">
   <div class="wrap">
-    <a class="brand" href="#" aria-label="Elita Arte y Diseño, inicio"><b>ELITA</b><small>ARTE &amp; DISEÑO</small></a>
+    <a class="brand" href="#">Elita Arte &amp; Diseño</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav"><span class="sr-only">Abrir menú</span><span class="ic-open">{{icon:menu}}</span><span class="ic-close">{{icon:x}}</span></button>
     <nav class="nav" id="nav" aria-label="Principal">
       <a href="#oficios">Lo que hago</a>
@@ -283,19 +280,25 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 <main id="contenido">
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero-wall">
-    <img class="hero-logo" src="assets/logo-burgundy.webp" width="860" height="725" alt="Elita Arte y Diseño" fetchpriority="high">
+  <div class="hero-pair">
+    <figure class="hero-logo">
+      <img src="assets/marca/elita-logo-original.jpg" width="960" height="1280" alt="Elita Arte y Diseño" fetchpriority="high">
+    </figure>
+    <figure class="hero-art">
+      <img src="assets/obra/verde-espejo.webp" width="1080" height="1145" alt="Cuadro abstracto en verdes y crema apoyado junto a un espejo de marco tallado" fetchpriority="high">
+      <figcaption>Pieza en acrílico</figcaption>
+    </figure>
+  </div>
+  <div class="wrap hero-text">
     <h1 id="hero-title">Murales, cuadros y molduras pintados a mano en Barranquilla</h1>
-    <p class="hero-lead">Soy Daniela, arquitecta y artista plástica. Diseño cada pieza pensando en el espacio donde va a vivir.</p>
-    <div class="hero-actions" id="hero-actions">
-      <a class="btn btn-wa" href="{{wa}}" target="_blank" rel="noopener">{{icon:whatsapp}} Escríbeme por WhatsApp</a>
-      <a class="link" href="#obra">Ver la obra</a>
+    <div>
+      <p class="hero-lead">Soy Daniela, arquitecta y artista plástica. Diseño cada pieza pensando en el espacio donde va a vivir.</p>
+      <div class="hero-actions" id="hero-actions">
+        <a class="btn btn-wa" href="{{wa}}" target="_blank" rel="noopener">{{icon:whatsapp}} Escríbeme por WhatsApp</a>
+        <a class="link" href="#obra">Ver la obra</a>
+      </div>
     </div>
   </div>
-  <figure class="hero-art">
-    <img src="assets/obra/verde-espejo.webp" width="1080" height="1145" alt="Cuadro abstracto en verdes y crema apoyado junto a un espejo de marco tallado" fetchpriority="high">
-    <figcaption>Pieza en acrílico<span>Acrílico sobre lienzo</span></figcaption>
-  </figure>
 </section>
 
 <section class="sec" id="oficios" aria-labelledby="oficios-title">
@@ -419,7 +422,7 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 
 <footer class="pie">
   <div class="wrap">
-    <img src="assets/logo-burgundy.webp" width="860" height="725" alt="Elita Arte y Diseño" loading="lazy">
+    <p class="pie-marca">Elita Arte &amp; Diseño</p>
     <nav aria-label="Pie de página">
       <a href="#obra">Obra</a>
       <a href="https://www.instagram.com/elita.arte/" target="_blank" rel="noopener">Instagram</a>
@@ -452,7 +455,7 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // La marca del encabezado aparece cuando el logo grande sale de vista
-  new IntersectionObserver(([en]) => top.classList.toggle('past-logo', !en.isIntersecting), { rootMargin: '-72px 0px 0px 0px' }).observe($('.hero-logo'));
+  new IntersectionObserver(([en]) => top.classList.toggle('past-logo', !en.isIntersecting), { rootMargin: '-72px 0px 0px 0px' }).observe($('.hero-logo img'));
 
   // Menú en celular
   const menuBtn = $('.menu-btn'), nav = $('#nav');

@@ -24,7 +24,7 @@ Para ver el sitio en local: `python3 -m http.server` y abrir `http://localhost:8
 - Tipografía: Bellefair para títulos (eco del logo) y Hanken Grotesk para texto. Ambas OFL, incluidas en `assets/fonts/`.
 - Íconos: Simple Icons (WhatsApp, Instagram) y Lucide, en `assets/icons/`, incrustados al compilar.
 - La sombra de hojas de la portada sale de la foto original del logo (`assets/sombra-hojas.webp`).
-- `assets/marca/` tiene el logo con fondo transparente en vino y en blanco, en alta.
+- El logo se usa tal cual, en su imagen original (`assets/marca/elita-logo-original.jpg`).
 
 ## Publicar
 
@@ -37,5 +37,6 @@ GitHub Pages desde la rama `main`, carpeta raíz (Settings → Pages). Para domi
 - Confirmar que se pueden nombrar las diseñadoras con las que trabajó y los nombres de los niños de los murales (Vale, Vittoria, Victoria, Sebastián).
 - Títulos reales de las obras, medidas y año, si quiere mostrarlos.
 - Ciudades donde trabaja y si hace envíos nacionales.
+- Confirmar que el cuadro de la portada (verde con el espejo tallado) es obra suya y su técnica: el post de Instagram solo dice "pieza en acrílico".
 - Correo de contacto, si quiere uno además de WhatsApp.
 - Dominio (por ejemplo `elitaarte.com`): después de comprarlo, agregar `<link rel="canonical">` y URLs absolutas en las etiquetas `og:`.

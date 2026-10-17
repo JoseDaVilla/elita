@@ -26,11 +26,11 @@ OBRA = [
      "Mural de árboles en rosa pálido sobre la cuna de una habitación de bebé"),
     ("meraki-gran-formato", "cuadros", "Proyecto Meraki", "Gran formato, acrílico texturizante sobre lienzo",
      "Dos cuadros grandes de formas orgánicas blancas sobre un sofá gris"),
-    ("molduras-rayas", "muros", "Molduras y mural", "Rayas onduladas pintadas a mano",
+    ("molduras-rayas", "muros", "Molduras y mural", "",
      "Pared de rayas azules onduladas con moldura color vino junto a una cuna"),
-    ("pieza-unica-verde", "cuadros", "Pieza única", "Acrílico sobre lienzo",
+    ("pieza-unica-verde", "cuadros", "Pieza única", "",
      "Cuadro enmarcado con una trama de gotas verdes que se aclaran hacia abajo"),
-    ("mural-arcoiris", "muros", "Mural para Victoria", "Arcoíris y flores a mano",
+    ("mural-arcoiris", "muros", "Mural para Victoria", "",
      "Mural de arcoíris pastel con flores lila y amarillas"),
     ("water-paint", "cuadros", "Water Paint", "Acrílico sobre lienzo, hoy en Medellín",
      "Detalle de pintura con manchas de verde profundo, salvia y arena"),
@@ -40,9 +40,9 @@ OBRA = [
      "Cuadro de la Torre del Reloj de Cartagena sobre un sofá"),
     ("mural-mariposas", "muros", "Mariposas monarca", "Mural a mano",
      "Detalle de mural con una flor blanca y una mariposa monarca"),
-    ("arena-boho", "cuadros", "Arte boho", "Acrílico texturizado efecto arena, 1,0 × 0,70 m",
+    ("arena-boho", "cuadros", "Arte boho", "Pieza por encargo, 1,0 × 0,70 m",
      "Detalle de textura en relieve color arena con una curva suave"),
-    ("relieve-floral", "muros", "Muro en relieve", "Textura botánica en tonos claros",
+    ("relieve-floral", "muros", "Mural", "",
      "Pared de comedor con un relieve botánico blanco sobre fondo gris"),
     ("mural-avion", "muros", "Para Sebastián", "Mural hecho a mano",
      "Mural infantil de un osito piloto en avioneta"),
@@ -73,7 +73,7 @@ def obra():
             f'<img src="assets/obra/{f}.webp" width="{w}" height="{h}" alt="{e(alt)}" loading="lazy" decoding="async">'
             f"</button>"
             f'<figcaption><span class="work-title">{e(title)}</span>'
-            f'<span class="work-detail">{e(detail)}</span></figcaption></figure>'
+            + (f'<span class="work-detail">{e(detail)}</span>' if detail else '') + '</figcaption></figure>'
         )
     return "\n".join(out)
 
