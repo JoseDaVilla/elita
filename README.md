@@ -1,4 +1,4 @@
-# Elita Arte & Diseño
+ # Elita Arte & Diseño
 
 Sitio de Daniela, arquitecta y artista plástica en Barranquilla. Página única, estática, sin dependencias: HTML, CSS y un poco de JavaScript.
 
