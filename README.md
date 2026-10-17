@@ -24,11 +24,11 @@ Para ver el sitio en local: `python3 -m http.server` y abrir `http://localhost:8
 - Tipografía: Bellefair para títulos (eco del logo) y Hanken Grotesk para texto. Ambas OFL, incluidas en `assets/fonts/`.
 - Íconos: Simple Icons (WhatsApp, Instagram) y Lucide, en `assets/icons/`, incrustados al compilar.
 - La sombra de hojas de la portada sale de la foto original del logo (`assets/sombra-hojas.webp`).
-- El logo se usa tal cual, en su imagen original (`assets/marca/elita-logo-original.jpg`).
+- Logo: la imagen original está en `assets/marca/elita-logo-original.jpg`. De ahí salen el logo sin fondo (`elita-logo-sin-fondo.png`) y la versión horizontal del encabezado (`elita-horizontal.png`).
 
 ## Publicar
 
-GitHub Pages desde la rama `main`, carpeta raíz (Settings → Pages). Para dominio propio, agregar un archivo `CNAME` con el dominio y configurar el DNS.
+Cada push a `main` publica con GitHub Actions (`.github/workflows/pages.yml`). En Settings → Pages, la fuente debe ser "GitHub Actions". Para dominio propio, agregar un archivo `CNAME` con el dominio y configurar el DNS.
 
 ## Pendiente de Daniela
 
@@ -40,3 +40,9 @@ GitHub Pages desde la rama `main`, carpeta raíz (Settings → Pages). Para domi
 - Confirmar que el cuadro de la portada (verde con el espejo tallado) es obra suya y su técnica: el post de Instagram solo dice "pieza en acrílico".
 - Correo de contacto, si quiere uno además de WhatsApp.
 - Dominio (por ejemplo `elitaarte.com`): después de comprarlo, agregar `<link rel="canonical">` y URLs absolutas en las etiquetas `og:`.
+
+## Intro
+
+La primera vez que alguien abre la página, la flor del logo se dibuja sobre su fondo de sombras y luego aparecen las letras. Dura unos 4,5 segundos, se salta con un clic, tecla o scroll, y no vuelve a salir en ese navegador. Para verla otra vez: abrir la página con `?intro` al final de la dirección. No se muestra a quien tiene activado "reducir movimiento".
+
+Las capas están en `assets/intro/` (flor, estambres, letras, subtítulo y fondo), separadas del logo original.

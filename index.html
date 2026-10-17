@@ -2,7 +2,9 @@
 <html lang="es-CO" class="no-js">
 <head>
 <meta charset="utf-8">
-<script>document.documentElement.className="js"</script>
+<script>
+(function(){var d=document.documentElement;d.className="js";try{var force=/(^|[?&#])intro\b/.test(location.search+location.hash);var seen=localStorage.getItem("elita-intro");var rm=matchMedia("(prefers-reduced-motion: reduce)").matches;if(force||(!seen&&!rm))d.classList.add("intro-on")}catch(e){}})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Elita Arte &amp; Diseño | Murales, cuadros y molduras a mano en Barranquilla</title>
 <meta name="description" content="Daniela, arquitecta y artista plástica en Barranquilla. Cuadros por encargo, murales y molduras pintados a mano para casas, hoteles y proyectos de interiorismo.">
@@ -82,8 +84,8 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 .top{position:sticky;top:0;z-index:40;height:var(--header);background:color-mix(in srgb,var(--cal) 88%,transparent);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
 .top.scrolled{border-bottom-color:var(--linea)}
 .top .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:none}
-.brand{display:block;font:400 1.35rem/1 var(--serif);color:var(--buganvilla);text-decoration:none;transition:opacity .35s,transform .35s}
-.js .top:not(.past-logo) .brand{opacity:0;transform:translateY(4px);pointer-events:none}
+.brand{display:block;flex:none}
+.brand img{height:46px;width:auto}
 .nav{display:flex;align-items:center;gap:clamp(18px,2.4vw,34px)}
 .nav a{text-decoration:none;font-size:.95rem}
 .nav a:not(.btn):hover{color:var(--buganvilla)}
@@ -227,6 +229,7 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
   .nav.open{opacity:1;transform:none;visibility:visible;transition:opacity .2s,transform .2s}
   .nav a:not(.btn){padding:14px 0;border-bottom:1px solid var(--linea);font-size:1.05rem}
   .nav .btn{margin-top:18px;justify-content:center;min-height:48px}
+  .brand img{height:38px}
   .hero{display:flex;flex-direction:column}
   .hero-pair{display:contents}
   .hero-logo{aspect-ratio:1/1;order:1}
@@ -254,6 +257,36 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
   .visor-cap{padding-left:72px;padding-right:72px}
 }
 
+/* Intro: la flor del logo se dibuja la primera vez */
+.intro{display:none}
+.intro-on body{overflow:hidden}
+.intro-on .intro{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:#F5F7F9;cursor:pointer;transition:opacity .9s ease,visibility 0s .9s}
+.intro-bg{position:absolute;inset:-3%;background:url(assets/intro/fondo.webp) 62% 50%/cover no-repeat;opacity:0;transform:scale(1.05)}
+.intro svg{position:relative;width:min(80vw,600px,calc(70vh * 620 / 510));height:auto;overflow:visible}
+.intro .lyr,.intro .st,.intro .ltr,.intro .sub,.intro .full{opacity:0}
+.intro .m path{fill:none;stroke:#fff;stroke-dasharray:1 1;stroke-dashoffset:1}
+.intro .lyr{opacity:1}
+.intro .st{transform-box:fill-box;transform-origin:56.8% 26.5%;transform:scale(.55) rotate(-8deg)}
+.intro .ltr{transform-box:fill-box;transform:translateY(7px)}
+.intro .sub{transform-box:fill-box;transform-origin:50% 50%;transform:scaleX(1.06)}
+.intro-skip{position:absolute;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));background:none;border:0;padding:10px 6px;font:500 .85rem/1 var(--sans);color:var(--piedra);cursor:pointer;opacity:0;transition:opacity .4s .6s}
+.intro.play .intro-skip{opacity:1}
+.intro.play .intro-bg{animation:introBg 2.4s cubic-bezier(.2,.6,.2,1) forwards}
+.intro.play .m path{animation:draw var(--d) var(--t) cubic-bezier(.5,.05,.25,1) forwards}
+.intro.play .st{animation:bloom .8s 2.05s cubic-bezier(.2,.8,.25,1.15) forwards}
+.intro.play .full{animation:show .35s 2.55s ease forwards}
+.intro.play .ltr{animation:rise .75s var(--t) cubic-bezier(.2,.7,.2,1) forwards}
+.intro.play .sub{animation:track .9s 3.05s cubic-bezier(.2,.7,.2,1) forwards}
+.intro.done{opacity:0;visibility:hidden}
+.intro.done svg{transform:scale(1.03);transition:transform .9s ease}
+.intro.fast *{animation-duration:.01s!important;animation-delay:0s!important}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes bloom{to{opacity:1;transform:none}}
+@keyframes show{to{opacity:1}}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes track{to{opacity:1;transform:none}}
+@keyframes introBg{to{opacity:1;transform:none}}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -261,11 +294,44 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
 </style>
 </head>
 <body>
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-bg"></div>
+  <svg viewBox="180 360 620 510" role="presentation">
+    <defs>
+      <filter id="pluma" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.2"/></filter>
+      <mask id="crece" maskUnits="userSpaceOnUse" x="150" y="330" width="680" height="570">
+        <g class="m" filter="url(#pluma)">
+          <path pathLength="1" style="--t:.25s;--d:1.3s" stroke-width="22" stroke-linecap="round" d="M346,862 C356,830 366,800 378,765 C390,735 410,712 432,690 C452,668 466,640 480,605 C492,578 506,548 523,513"/>
+          <path pathLength="1" style="--t:1s;--d:.8s" stroke-width="76" d="M456,669 Q408,612 367,540"/>
+          <path pathLength="1" style="--t:1.15s;--d:.85s" stroke-width="92" d="M492,575 Q560,603 618,686"/>
+          <path pathLength="1" style="--t:1.4s;--d:.75s" stroke-width="82" d="M527,527 Q485,480 437,423"/>
+          <path pathLength="1" style="--t:1.5s;--d:.85s" stroke-width="108" d="M521,520 Q550,446 556,364"/>
+          <path pathLength="1" style="--t:1.65s;--d:.7s" stroke-width="70" d="M515,520 Q575,507 640,482"/>
+        </g>
+      </mask>
+      <clipPath id="cE"><rect x="200" y="584" width="68" height="114"/></clipPath>
+      <clipPath id="cL"><rect x="329" y="584" width="68" height="114"/></clipPath>
+      <clipPath id="cI"><rect x="464" y="584" width="28" height="114"/></clipPath>
+      <clipPath id="cT"><rect x="551" y="584" width="78" height="114"/></clipPath>
+      <clipPath id="cA"><rect x="682" y="584" width="97" height="114"/></clipPath>
+    </defs>
+    <image class="lyr" href="assets/intro/flor.webp" x="180" y="360" width="620" height="510" mask="url(#crece)"/>
+    <image class="full" href="assets/intro/flor-completa.webp" x="180" y="360" width="620" height="510"/>
+    <image class="st" href="assets/intro/estambres.webp" x="180" y="360" width="620" height="510"/>
+    <g clip-path="url(#cE)"><image class="ltr" style="--t:2.2s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
+    <g clip-path="url(#cL)"><image class="ltr" style="--t:2.32s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
+    <g clip-path="url(#cI)"><image class="ltr" style="--t:2.44s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
+    <g clip-path="url(#cT)"><image class="ltr" style="--t:2.56s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
+    <g clip-path="url(#cA)"><image class="ltr" style="--t:2.68s" href="assets/intro/letras.webp" x="180" y="360" width="620" height="510"/></g>
+    <image class="sub" href="assets/intro/subtitulo.webp" x="180" y="360" width="620" height="510"/>
+  </svg>
+  <button class="intro-skip" type="button" tabindex="-1">Saltar</button>
+</div>
 <a class="skip" href="#contenido">Saltar al contenido</a>
 
 <header class="top" id="top">
   <div class="wrap">
-    <a class="brand" href="#">Elita Arte &amp; Diseño</a>
+    <a class="brand" href="#" aria-label="Elita Arte y Diseño, inicio"><img src="assets/marca/elita-horizontal.webp" width="572" height="156" alt="Elita Arte y Diseño"></a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav"><span class="sr-only">Abrir menú</span><span class="ic-open"><svg class="i" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M4 5h16" /> <path d="M4 12h16" /> <path d="M4 19h16" /> </svg></span><span class="ic-close"><svg class="i" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M18 6 6 18" /> <path d="m6 6 12 12" /> </svg></span></button>
     <nav class="nav" id="nav" aria-label="Principal">
       <a href="#oficios">Lo que hago</a>
@@ -467,9 +533,6 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
   const onScroll = () => top.classList.toggle('scrolled', scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-  // La marca del encabezado aparece cuando el logo grande sale de vista
-  new IntersectionObserver(([en]) => top.classList.toggle('past-logo', !en.isIntersecting), { rootMargin: '-72px 0px 0px 0px' }).observe($('.hero-logo img'));
-
   // Menú en celular
   const menuBtn = $('.menu-btn'), nav = $('#nav');
   const setMenu = open => {
@@ -534,6 +597,29 @@ p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
   });
 
   $('#year').textContent = new Date().getFullYear();
+
+  // Intro
+  const intro = $('#intro');
+  if (document.documentElement.classList.contains('intro-on')) {
+    try { localStorage.setItem('elita-intro', '1'); } catch (e) {}
+    let ended = false, timer;
+    const finish = () => {
+      if (ended) return; ended = true; clearTimeout(timer);
+      intro.classList.add('done');
+      setTimeout(() => { document.documentElement.classList.remove('intro-on'); intro.remove(); }, 950);
+    };
+    const skip = () => { intro.classList.add('fast'); setTimeout(finish, 120); };
+    const urls = ['flor', 'flor-completa', 'estambres', 'letras', 'subtitulo', 'fondo'].map(n => `assets/intro/${n}.webp`);
+    const load = Promise.all(urls.map(u => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = u; })));
+    Promise.race([load, new Promise(r => setTimeout(r, 2500))]).then(() => {
+      requestAnimationFrame(() => intro.classList.add('play'));
+      timer = setTimeout(finish, 4700);
+    });
+    intro.addEventListener('click', skip);
+    addEventListener('keydown', e => { if (!ended && ['Escape', 'Enter', ' '].includes(e.key)) skip(); });
+    addEventListener('wheel', skip, { once: true, passive: true });
+    addEventListener('touchmove', skip, { once: true, passive: true });
+  } else if (intro) intro.remove();
 })();
 </script>
 </body>
